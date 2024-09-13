@@ -1,0 +1,8 @@
+{
+    "functions": {
+      "api/serverless.js": {
+        "runtime": "nodejs18.x"
+      }
+    }
+  }
+  
