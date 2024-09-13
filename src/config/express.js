@@ -1,3 +1,4 @@
+require('dotenv').config({ path: './src/config/.env' })
 const express = require('express');
 const exceptionHandler = require('express-exception-handler');
 const error = require('../api/middlewares/error');
