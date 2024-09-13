@@ -28,3 +28,4 @@ Welcome to the **User CRUD API**! This is a simple RESTful API built with Node.j
 git clone https://github.com/your-username/user-crud-api.git
 cd user-crud-api
 npm install
+npm start
