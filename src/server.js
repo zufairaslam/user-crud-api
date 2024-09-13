@@ -1,19 +1,10 @@
 require('dotenv').config({ path: './src/config/.env' });
-const config = require('./config/config');
 const app = require('./config/express');
+const port = process.env.PORT || 3000;
 
-let server;
-
-const startServer = () => {
-    if (!server) {
-        server = app.listen(config.port, () => {
-            console.info(`Listening on port ${config.port}`);
-        });
-    }
-};
-
-// Call startServer only once
-startServer();
+const server = app.listen(port, () => {
+    console.info(`Listening on port ${port}`);
+});
 
 const exitHandler = () => {
     if (server) {
@@ -33,12 +24,12 @@ const unexpectedErrorHandler = (error) => {
 
 process.on('uncaughtException', unexpectedErrorHandler);
 process.on('unhandledRejection', unexpectedErrorHandler);
-
 process.on('SIGTERM', () => {
     console.info('SIGTERM received');
     if (server) {
         server.close();
     }
 });
+
 
 module.exports = server;
