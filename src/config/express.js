@@ -1,5 +1,4 @@
 const express = require('express');
-const config = require('./config');
 const exceptionHandler = require('express-exception-handler');
 const error = require('../api/middlewares/error');
 const connectDB = require("../api/database/mongodb");
