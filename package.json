@@ -4,6 +4,7 @@
   "description": "Welcome to the **User CRUD API**! This is a simple RESTful API built with Node.js, Express, and MongoDB. It allows you to manage users with CRUD operations, including authentication, validation, pagination, and search functionality.",
   "main": "src/server.js",
   "scripts": {
+    "start": "src/server.js",
     "dev": "nodemon src/server.js -e ejs,js,css,html,jpg,png,scss"
 
   },
