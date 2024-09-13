@@ -3,14 +3,10 @@ const config = require('./config/config')
 const app = require('./config/express')
 
 
-let server;
+let server = app.listen(config.port, async () => {
+    console.info(`Listening on port ${config.port}`)
+})
 
-
-if (require.main === module) {
-    app.listen(config.port, async () => {
-        console.info(`Listening on port ${config.port}`)
-    })
-}
 
 
 // Access the environment variables
