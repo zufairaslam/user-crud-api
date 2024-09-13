@@ -4,7 +4,7 @@ const app = require('./config/express')
 
 
 let server = app.listen(config.port, async () => {
-    logger.info(`Listening on port ${config.port}`)
+    console.info(`Listening on port ${config.port}`)
 })
 
 
@@ -14,7 +14,7 @@ let server = app.listen(config.port, async () => {
 const exitHandler = () => {
     if (server) {
         server.close(() => {
-            logger.info('Server closed')
+            console.info('Server closed')
             process.exit(1)
         })
     } else {
@@ -23,7 +23,7 @@ const exitHandler = () => {
 }
 
 const unexpectedErrorHandler = (error) => {
-    logger.error(error)
+    console.error(error)
     exitHandler()
 }
 
@@ -31,7 +31,7 @@ process.on('uncaughtException', unexpectedErrorHandler)
 process.on('unhandledRejection', unexpectedErrorHandler)
 
 process.on('SIGTERM', () => {
-    logger.info('SIGTERM received')
+    console.info('SIGTERM received')
     if (server) {
         server.close()
     }
