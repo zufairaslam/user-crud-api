@@ -1,38 +1,44 @@
-require('dotenv').config({ path: './src/config/.env' })
-const config = require('./config/config')
-const app = require('./config/express')
+require('dotenv').config({ path: './src/config/.env' });
+const config = require('./config/config');
+const app = require('./config/express');
 
-let server = app.listen(config.port, async () => {
-    console.info(`Listening on port ${config.port}`)
-})
+let server;
 
+const startServer = () => {
+    if (!server) {
+        server = app.listen(config.port, () => {
+            console.info(`Listening on port ${config.port}`);
+        });
+    }
+};
 
-// Access the environment variables
+// Call startServer only once
+startServer();
 
 const exitHandler = () => {
     if (server) {
         server.close(() => {
-            console.info('Server closed')
-            process.exit(1)
-        })
+            console.info('Server closed');
+            process.exit(1);
+        });
     } else {
-        process.exit(1)
+        process.exit(1);
     }
-}
+};
 
 const unexpectedErrorHandler = (error) => {
-    console.error(error)
-    exitHandler()
-}
+    console.error(error);
+    exitHandler();
+};
 
-process.on('uncaughtException', unexpectedErrorHandler)
-process.on('unhandledRejection', unexpectedErrorHandler)
+process.on('uncaughtException', unexpectedErrorHandler);
+process.on('unhandledRejection', unexpectedErrorHandler);
 
 process.on('SIGTERM', () => {
-    logger.info('SIGTERM received')
+    console.info('SIGTERM received');
     if (server) {
-        server.close()
+        server.close();
     }
-})
+});
 
-module.exports = server
+module.exports = server;
